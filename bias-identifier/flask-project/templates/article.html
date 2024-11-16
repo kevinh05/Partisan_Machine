@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partisan Machine</title>
+	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-900 font-sans p-8 ">
+	
+    <article class="bg-white p-6 rounded shadow-md">
+        <header>
+			<hr class="my-0 border-t-2 border-gray-500">
+            <h1 data-ripple-light="true" data-tooltip-target="title" class="border-double border-black text-black px-4 bg-blue-100 py-5 text-4xl font-bold mb-4 text-center transition-all hover:shadow-lg hover:shadow-gray-900/20">{{ body[0][1] }}</h1>
+			<!-- <hr class="my-4 border-t-2 border-gray-500"> -->
+
+			<div data-tooltip="title" data-tooltip-mount="opacity-100 scale-100"
+			    data-tooltip-unmount="opacity-0 scale-0 pointer-events-none"
+			    data-tooltip-transition="transition-all duration-200 origin-bottom"
+				data-tooltip-placement="bottom" 
+			    class=" py-5 px-2 mx-auto lg:max-w-screen-lg absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none">
+			    {{title_a}}
+			</div>
+
+			
+			<p class="text-gray-600">Original Article: <a class="no-underline hover:underline text-blue-600"href="{{url}}"> {{url}}</a></p>
+            <p class="text-gray-600">Author(s): {{author}}</p>
+            <p class="text-gray-600">Published on: {{date}}</p> 
+			<br>
+			
+			<img src="{{img}}" style="width: 50vw;" class=" border-t-2 border-gray-500 mx-auto text-center">
+			<p  style="width: 50vw;" class="border-t-2 border-gray-500 text-black bg-blue-100 mx-auto text-center py-1 px-1"> Selection and editing of certain images allows articles to influence the reader's perspective of the subject</p>
+        </header>
+		<hr class="my-4 border-t-2 border-gray-500">
+        <section class=" mt-4 text-gray-700">
+			
+			
+			{% for element in body[1:]%}
+				{% if element[0] == 0 %}
+					<br><br>
+				{% elif element[0] == 1%}
+					<span data-ripple-light="true" data-tooltip-target="{{loop.index}}"
+					class="select-none align-middle font-bold text-blue-500 transition-all hover:shadow-lg hover:shadow-gray-900/20 ">
+							{{element[1]}}
+					</span>
+					<div data-tooltip="{{loop.index}}" data-tooltip-mount="opacity-100 scale-100"
+							data-tooltip-unmount="opacity-0 scale-0 pointer-events-none"
+							data-tooltip-transition="transition-all duration-200 origin-bottom"
+							class=" mx-auto lg:max-w-screen-lg absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none">
+						{{element[2]}}
+					</div>
+				{% else %}
+					{{element[1]}}
+				{% endif %}
+			{% endfor %}
+
+
+           
+        </section>
+
+		<hr class="my-0 border-t-2 border-gray-500">
+
+		<div class="text-black bg-blue-100 mx-auto text-center">
+			<h1 class="font-bold text-center py-1 underline text-lg "> Affects of Selection Bias</h1>
+			<p class="text-center pb-3 px-4 text-base ">
+				{{selection}}
+			</p>
+		</div>
+		<br>
+		<div class="flex">
+			<a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+				Return
+			</a>
+			<a href="https://github.com/kevinh05/bias-identifier" class="flex items-center px-4">
+				<img src="{{url_for('static', filename='Github.png')}}" alt="Home" class="mr-2 w-9 h-9">
+			</a>
+		</div>
+		
+    </article>
+
+	
+
+</body>
+
+
+<!-- from node_modules -->
+<script
+  type="module"
+  src="node_modules/@material-tailwind/html@latest/scripts/tooltip.js"
+></script>
+ 
+<!-- from cdn -->
+<script
+  type="module"
+  src="https://unpkg.com/@material-tailwind/html@latest/scripts/tooltip.js"
+></script>
+</html>
